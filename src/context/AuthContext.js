@@ -70,12 +70,10 @@ const clearErrorMessage = (dispatch) => {
   };
 };
 
-const signout = (dispatch) => {
-  return async () => {
-    await AsyncStorage.removeItem("token");
-    dispatch({ type: "signout" });
-    navigate("loginFlow");
-  };
+const signout = (dispatch) => async () => {
+  await AsyncStorage.removeItem("token");
+  dispatch({ type: "signout" });
+  navigate("loginFlow");
 };
 
 export const { Context, Provider } = createDataContext(

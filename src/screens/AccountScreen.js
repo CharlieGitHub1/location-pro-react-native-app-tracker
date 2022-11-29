@@ -1,30 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context as AuthContext } from "../context/AuthContext";
 import { View, Text, StyleSheet } from "react-native";
+import Button from "../components/Button";
 import { SafeAreaView } from "react-navigation";
-import SignoutButton from "../components/Button";
 import Spacer from "../components/Spacer";
 
 const AccountScreen = () => {
   const { signout } = useContext(AuthContext);
 
-  useEffect(() => {
-    signout();
-  }, []);
-
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
-      <View style={styles.container}>
-        <Text style={styles.text}>WELCOME TO THE ACCOUNT SCREEN</Text>
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <SignoutButton text="SIGN OUT" routeName="Signin" />
-      </View>
+      <Text style={{ fontSize: 48 }}>AccountScreen</Text>
+      <Spacer>
+        <Button title="Sign Out" onPress={signout} />
+      </Spacer>
     </SafeAreaView>
   );
 };
@@ -44,6 +33,25 @@ const styles = StyleSheet.create({
     color: "#fdfffc",
     fontWeight: "bold",
     marginHorizontal: 15,
+  },
+  buttonStyle: {
+    backgroundColor: "#2ec4b6",
+    color: "#fdfffc",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    height: 50,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 2,
+    color: "white",
   },
 });
 
