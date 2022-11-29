@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#fdfffc",
     textAlign: "center",
+    letterSpacing: 5,
   },
   title: {
     fontSize: 24,

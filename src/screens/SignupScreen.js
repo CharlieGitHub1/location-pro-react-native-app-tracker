@@ -1,25 +1,27 @@
 import React, { useContext } from "react";
+import { NavigationEvents } from "react-navigation";
 import { View, StyleSheet } from "react-native";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthenticationForm from "../components/AuthForm";
 import CaptionLink from "../components/CaptionLink";
 import Spacer from "../components/Spacer";
 
-const SignupScreen = () => {
-  const { state, signup } = useContext(AuthContext);
-
-  console.log(state);
+const SignupScreen = ({ navigation }) => {
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillFocus={clearErrorMessage} />
       <AuthenticationForm
         textTitle="SIGN UP"
         errorMessage={state.errorMessage}
         onSubmit={signup}
-        submitButtonText="Sign Up"
+        submitButtonText="SIGN UP"
       />
-      <CaptionLink text="Have an account already?" routeName="SIGN IN" />
-
+      <CaptionLink
+        text="Already have an account? Sign in instead"
+        routeName="Signin"
+      />
       <Spacer />
     </View>
   );

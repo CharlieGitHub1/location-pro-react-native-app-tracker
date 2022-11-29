@@ -1,34 +1,25 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { withNavigation } from "react-navigation";
 import Spacer from "./Spacer";
 
 const CaptionLink = ({ text, navigation, routeName }) => {
   return (
-    <View>
-      <Spacer />
-      <Text
-        style={{
-          alignSelf: "center",
-          color: "white",
-          fontSize: 18,
-        }}
-      >
-        {text}
-      </Text>
-      <Spacer />
-      <Pressable onPress={() => navigation.navigate(routeName)}>
+    <>
+      <TouchableOpacity onPress={() => navigation.navigate(routeName)}>
+        <Spacer />
         <Text
           style={{
+            fontWeight: "bold",
             alignSelf: "center",
             color: "#2ec4b6",
             fontSize: 14,
           }}
         >
-          {routeName}
+          {text}
         </Text>
-      </Pressable>
-    </View>
+      </TouchableOpacity>
+    </>
   );
 };
 
