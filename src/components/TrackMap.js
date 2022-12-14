@@ -1,28 +1,43 @@
-import React from "react";
-import { View, StyleSheet, Image } from "react-native";
-import MapView, { Polyline } from "react-native-maps";
+import React, { useContext } from "react";
+import { Context as LocationContext } from "../context/LocationContext";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
+import MapView, { Circle } from "react-native-maps";
 
 const TrackMap = () => {
-  const points = [];
-  for (let i = 0; i < 20; i++) {
-    points.push({
-      latitude: 29.563566 + i * 0.001,
-      longitude: -95.286047 + i * 0.001,
-    });
+  const {
+    state: { liveLocation },
+  } = useContext(LocationContext);
+
+  if (!liveLocation) {
+    return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
   }
+
+  // initialLocation = {
+  //   longitude: -95.286047,
+  //   latitude: 29.563566,
+  // };
 
   return (
     <View style={styles.container}>
       <MapView
         initialRegion={{
-          longitude: -95.286047,
-          latitude: 29.563566,
+          ...liveLocation.coords,
           longitudeDelta: 0.01,
           latitudeDelta: 0.01,
         }}
+        // region={{
+        //   ...liveLocation.coords,
+        //   longitudeDelta: 0.01,
+        //   latitudeDelta: 0.01,
+        // }}
         style={styles.mapStyle}
       >
-        <Polyline coordinates={points} />
+        <Circle
+          center={liveLocation.coords}
+          radius={30}
+          strokeColor="rgba(103, 50, 255, 1)"
+          fillColor="rgba(103, 50, 255, 0.25)"
+        />
       </MapView>
     </View>
   );

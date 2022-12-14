@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context as LocationContext } from "../context/LocationContext";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import {
   requestForegroundPermissionsAsync,
@@ -7,9 +8,10 @@ import {
 } from "expo-location";
 import TrackMap from "../components/TrackMap";
 import Spacer from "../components/Spacer";
-// import "../locationMockData";
+import "../locationMockData";
 
 const TrackCreateScreen = () => {
+  const { updateLocation } = useContext(LocationContext);
   const [error, setError] = useState(null);
   const beginWatch = async () => {
     try {
@@ -21,7 +23,7 @@ const TrackCreateScreen = () => {
           distanceInterval: 10,
         },
         (location) => {
-          console.log(location);
+          updateLocation(location);
         }
       );
 
